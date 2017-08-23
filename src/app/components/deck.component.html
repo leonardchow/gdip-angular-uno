@@ -1,0 +1,24 @@
+<h1>Deck</h1>
+
+<div class="alert alert-warning decktable">
+  TABLE
+  <span *ngFor="let card of tableCards">
+      <img src="{{ card.imageUrl }}" style="width: 3em" />        
+  </span>
+</div>
+
+<div *ngIf="players.length > 0" class="col-xs-12">
+    <div *ngFor="let player of players; let playerIndex = index" class="row">
+      <div 
+        class="col-xs-12 alert
+          {{ playerIndex == currentPlayer ? 'alert-success' : '' }}
+          ">
+        <span class="bg-success text-success">Player {{ playerIndex + 1 }}</span>
+        <span *ngFor="let card of player; let cardIndex = index"
+          (click)="cardClicked({player: playerIndex, card: cardIndex})">
+          <img src="{{ card.imageUrl }}" style="width: 3em" />
+        </span>
+        <span *ngIf="playerIndex == currentPlayer" class="label label-success">Your turn!</span>
+      </div>
+    </div>
+</div>
